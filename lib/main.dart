@@ -1,9 +1,17 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:uber_rider_app/AllScreens/login_screen.dart';
 import 'package:uber_rider_app/AllScreens/main_screen.dart';
+import 'package:uber_rider_app/AllScreens/registration_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
+
+DatabaseReference usersRef = FirebaseDatabase.instance.ref().child("users");
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -12,8 +20,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Taxi Rider App',
       theme: ThemeData(
+        fontFamily: "Brand Bold",
         // This is the theme of your application.
         //
         // Try running your application with "flutter run". You'll see the
@@ -25,7 +34,12 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MainScreen(),
+      initialRoute: LoginScreen.idScreen,
+      routes: {
+        RegistrationScreen.idScreen: (context) => RegistrationScreen(),
+        LoginScreen.idScreen: (context) => LoginScreen(),
+        MainScreen.idScreen: (context) => MainScreen(),
+      },
     );
   }
 }

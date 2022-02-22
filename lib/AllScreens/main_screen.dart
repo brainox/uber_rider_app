@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  static const String idScreen = "mainScreen";
+
+  MainScreen({Key? key, this.user}) : super(key: key);
+  final User? user;
 
   @override
   _MainScreenState createState() => _MainScreenState();
